@@ -1,51 +1,23 @@
-
 pipeline {
-    
     agent any
 
-    .
     stages {
-        
-        stage('Build') {
+        stage('Clone Repository') {
             steps {
-                
-                echo 'Starting the build process...'
-                
+                git 'https://github.com/jansjossy/jenkins.git'
             }
         }
 
-        
-        stage('Test') {
+        stage('Build Docker Image') {
             steps {
-                
-
-                echo 'Running tests...'
-                
+                sh 'docker build -t demo-app .'
             }
         }
 
-        
-        stage('Deploy') {
+        stage('Run Container') {
             steps {
-                
-
-                echo 'Deploying the application...'
-               
+                sh 'docker run -d -p 3000:3000 demo-app'
             }
-        }
-    }
-
-   
-    post {
-        always {
-            echo 'Pipeline finished!'
-            
-        }
-        success {
-            echo 'Pipeline succeeded! Sending success notification...'
-        }
-        failure {
-            echo 'Pipeline failed! Sending failure notification...'
         }
     }
 }
