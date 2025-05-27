@@ -1,5 +1,5 @@
 git init
-git remote add origin https://github.com/jansjossy/demo-app.git
+git remote add origin https://github.com/jansjossy/jenkins.git
 git add .
 git commit -m "Initial commit"
 git push -u origin master
